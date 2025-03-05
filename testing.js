@@ -1,12 +1,12 @@
 // JSON.stringify() turned out not to return useful strings for NaN, undefined, promises, etc.
 export const resultText = (result) => (
   Array.isArray(result)
-  ? `[${result.map(resultText).join(', ')}]`
-  : typeof result === 'string'
-  ? `'${result}'`
-  : !(result instanceof Object) || (result instanceof Function) || (result instanceof Promise)
-  ? `${result}`
-  : `{${Object.keys(result).map(key => `${key}: ${resultText(result[key])}`).join(', ')}}`
+    ? `[${result.map(resultText).join(', ')}]`
+    : typeof result === 'string'
+      ? `'${result}'`
+      : !(result instanceof Object) || (result instanceof Function) || (result instanceof Promise)
+        ? `${result}`
+        : `{${Object.keys(result).map(key => `${key}: ${resultText(result[key])}`).join(', ')}}`
 );
 
 const argText = inputs => (
@@ -45,11 +45,11 @@ const testCaseResult = (exercise, fn, testCase) => {
 };
 
 const exerciseSummary = (results) => (
-  results.every(result => result.success === undefined) 
-  ? 'not-started'
-  : results.every(result => result.success) 
-  ? 'passed'
-  : 'failed'
+  results.every(result => result.success === undefined)
+    ? 'not-started'
+    : results.every(result => result.success)
+      ? 'passed'
+      : 'failed'
 );
 
 const exerciseTestResults = (exercise, data, solutions) => {
@@ -65,12 +65,12 @@ const exerciseTestResults = (exercise, data, solutions) => {
 
 const moduleSummary = (results) => (
   results.every(result => result.success === 'passed')
-  ? 'passed'
-  : results.some(result => result.success === 'failed')
-  ? 'failed'
-  : results.every(result => result.success === 'not-started')
-  ? 'not-started'
-  : 'mixed'
+    ? 'passed'
+    : results.some(result => result.success === 'failed')
+      ? 'failed'
+      : results.every(result => result.success === 'not-started')
+        ? 'not-started'
+        : 'mixed'
 );
 
 const moduleTestResults = (module, data, solutions) => {
@@ -78,7 +78,7 @@ const moduleTestResults = (module, data, solutions) => {
     exerciseTestResults(...entry, solutions)
   ));
   const success = moduleSummary(results);
-  return { 
+  return {
     id: module, ...data, success, results
   };
 };

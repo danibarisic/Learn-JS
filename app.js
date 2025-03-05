@@ -3,7 +3,7 @@ import * as solutions from './solutions.js';
 
 const app = Vue.createApp({
   data() {
-    return { 
+    return {
       exercises: {},
       modules: [],
       tested: false
@@ -11,12 +11,12 @@ const app = Vue.createApp({
   },
   mounted() {
     fetchJson('./exercises.json')
-    .then(json => {
-      this.exercises = json;
-      this.modules = testSolutions(json, solutions);
-      console.log(this.modules);
-    })
-    .catch(error => alert(error))
+      .then(json => {
+        this.exercises = json;
+        this.modules = testSolutions(json, solutions);
+        console.log(this.modules);
+      })
+      .catch(error => alert(error))
   },
   updated() {
     if (!this.tested) {
@@ -29,7 +29,7 @@ const app = Vue.createApp({
     display(text) {
       return resultText(text);
     },
-    noteLinks (reading) {
+    noteLinks(reading) {
       return replaceLinks(reading.base, reading.notes);
     }
   }
@@ -41,7 +41,7 @@ const fetchJson = async (url) => {
     if (!response.ok) {
       throw new Error(`${response.url} ${response.statusText}`)
     };
-    
+
     return await response.json();
   } catch (error) {
     alert(error);
