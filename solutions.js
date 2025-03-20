@@ -153,8 +153,15 @@ export const goPurple = () => {
 }
 
 export const copycat = (n) => {
-    let testCases = document.querySelectorAll('tr.test-result td:nth-child(3)');
-    if (n > 0 && n <= testCases.length) {
-        return testCases[n - 1].textContent;
+    if (n === undefined) {
+        return null
+    } else {
+        const tableRow = document.querySelector(`#copycat > div > table > tbody > tr:nth-child(${n})`);
+
+        const givenAnswer = tableRow.querySelector("td:nth-child(2)");
+
+        const expectedAnswer = givenAnswer.innerText;
+
+        return eval(expectedAnswer);
     }
 }
